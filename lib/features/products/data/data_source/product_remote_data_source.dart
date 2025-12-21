@@ -9,4 +9,12 @@ class ProductRemoteDataSource {
     final respose = await apiConsumer.get(EndPoints.baseUrl);
     return ProductsModel.fromJson(respose);
   }
+
+  Future<ProductsModel> searchProducts(String query) async {
+    final response = await apiConsumer.get(
+      EndPoints.search,
+      queryParameters: {ApiKeys.query: query},
+    );
+    return ProductsModel.fromJson(response);
+  }
 }

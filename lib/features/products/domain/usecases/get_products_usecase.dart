@@ -10,3 +10,12 @@ class GetProductsUsecase {
     return await productRepo.getAllProducts();
   }
 }
+
+class SearchProductsUsecase {
+  final ProductRepo productRepo;
+  SearchProductsUsecase({required this.productRepo});
+
+  Future<Either<Failure, ProductsModel>> call(String query) async {
+    return await productRepo.searchProducts(query);
+  }
+}

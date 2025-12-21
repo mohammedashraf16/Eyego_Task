@@ -4,4 +4,5 @@ import 'package:eyego_task/features/products/data/models/product_model.dart';
 
 abstract class ProductRepo {
   Future<Either<Failure, ProductsModel>> getAllProducts();
+  Future<Either<Failure, ProductsModel>> searchProducts(String query);
 }

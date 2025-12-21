@@ -37,4 +37,18 @@ class ProductRepoImpl extends ProductRepo {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, ProductsModel>> searchProducts(String query) async {
+    if (await networkInfo.isConnected!) {
+      try {
+        final searchResults = await remoteDataSource.searchProducts(query);
+        return Right(searchResults);
+      } on ServerException catch (e) {
+        return Left(Failure(errorMessage: e.errorModel.errorMessage));
+      }
+    } else {
+      return Left(Failure(errorMessage: "No internet connection"));
+    }
+  }
 }

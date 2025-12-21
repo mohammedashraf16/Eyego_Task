@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (context) =>
-            s1<ProductCubit>()..eitherFailureOrSuccessProducts(),
+            sl<ProductCubit>()..eitherFailureOrSuccessProducts(),
         child: const HomeScreen(),
       ),
     );

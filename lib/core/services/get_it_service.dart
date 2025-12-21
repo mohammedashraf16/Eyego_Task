@@ -12,33 +12,36 @@ import 'package:eyego_task/features/products/domain/usecases/get_products_usecas
 import 'package:eyego_task/features/products/presentation/manager/product_cubit.dart';
 import 'package:get_it/get_it.dart';
 
-final s1 = GetIt.instance;
+final sl = GetIt.instance;
 void setupServiceLocator() {
   // product cubit
-  s1.registerFactory(() => ProductCubit(getProductsUsecase: s1()));
+  sl.registerFactory(
+    () => ProductCubit(getProductsUsecase: sl(), searchProductsUsecase: sl()),
+  );
   // usecase
-  s1.registerLazySingleton(() => GetProductsUsecase(productRepo: s1()));
+  sl.registerLazySingleton(() => GetProductsUsecase(productRepo: sl()));
+  sl.registerLazySingleton(() => SearchProductsUsecase(productRepo: sl()));
 
   // repository
-  s1.registerLazySingleton<ProductRepo>(
+  sl.registerLazySingleton<ProductRepo>(
     () => ProductRepoImpl(
-      networkInfo: s1(),
-      remoteDataSource: s1(),
-      localDataSource: s1(),
+      networkInfo: sl(),
+      remoteDataSource: sl(),
+      localDataSource: sl(),
     ),
   );
   // data sources
-  s1.registerLazySingleton<ProductRemoteDataSource>(
-    () => ProductRemoteDataSource(apiConsumer: s1()),
+  sl.registerLazySingleton<ProductRemoteDataSource>(
+    () => ProductRemoteDataSource(apiConsumer: sl()),
   );
-  s1.registerLazySingleton<ProductLocalDataSource>(
-    () => ProductLocalDataSource(cacheHelper: s1()),
+  sl.registerLazySingleton<ProductLocalDataSource>(
+    () => ProductLocalDataSource(cacheHelper: sl()),
   );
   // core
-  s1.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(s1()));
-  s1.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: s1()));
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+  sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: sl()));
   // external
-  s1.registerLazySingleton(() => Dio());
-  s1.registerLazySingleton(() => CacheHelper());
-  s1.registerLazySingleton(() => DataConnectionChecker());
+  sl.registerLazySingleton(() => Dio());
+  sl.registerLazySingleton(() => CacheHelper());
+  sl.registerLazySingleton(() => DataConnectionChecker());
 }
