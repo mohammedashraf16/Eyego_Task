@@ -1,7 +1,7 @@
 class Dimensions {
-  double? width;
-  double? height;
-  double? depth;
+  num? width;
+  num? height;
+  num? depth;
 
   Dimensions({this.width, this.height, this.depth});
 

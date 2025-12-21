@@ -1,13 +1,19 @@
 import 'package:eyego_task/config/router/router_transitions.dart';
 import 'package:eyego_task/config/router/routes.dart';
+import 'package:eyego_task/features/auth/presentation/screens/login_screen.dart';
+import 'package:eyego_task/features/auth/presentation/screens/register_view.dart';
 import 'package:eyego_task/features/products/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.loginScreen:
+        return RouterTransitions.buildScale(LoginScreen());
+      case Routes.registerScreen:
+        return RouterTransitions.buildScale(RegisterScreen());
       case Routes.homeScreen:
-        return RouterTransitions.buildScale(HomeScreen());
+        return RouterTransitions.buildFade(HomeScreen());
       default:
         return unDefinedRoute();
     }

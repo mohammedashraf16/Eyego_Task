@@ -1,9 +1,9 @@
+import 'package:eyego_task/config/router/route_generator.dart';
+import 'package:eyego_task/config/router/routes.dart';
 import 'package:eyego_task/core/database/cache/cache_helper.dart';
 import 'package:eyego_task/core/services/get_it_service.dart';
-import 'package:eyego_task/features/products/presentation/manager/product_cubit.dart';
-import 'package:eyego_task/features/products/presentation/screens/home_screen.dart';
+import 'package:eyego_task/features/auth/presentation/screens/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,12 +18,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      onGenerateRoute: RouteGenerator.getRoute,
       debugShowCheckedModeBanner: false,
-      home: BlocProvider(
-        create: (context) =>
-            sl<ProductCubit>()..eitherFailureOrSuccessProducts(),
-        child: const HomeScreen(),
-      ),
+      initialRoute: Routes.loginScreen,
+      home: LoginView(),
     );
   }
 }
