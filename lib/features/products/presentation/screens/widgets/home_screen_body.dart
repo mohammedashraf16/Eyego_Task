@@ -17,6 +17,16 @@ class HomeScreenBody extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
+            bottom: AppBar(
+              title: Text(
+                "👋 Welcome, Mohammed",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: AppColors.kGreyColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             backgroundColor: AppColors.kPrimaryColor,
             title: const Text(
               'Products',

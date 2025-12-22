@@ -21,10 +21,10 @@ class RegisterScreenBodyBlocConsumer extends StatelessWidget {
             Routes.homeScreen,
             (route) => false,
           );
-          // showCustomToast(
-          //   message: "Account created successfully",
-          //   color: AppColors.kGreenColor,
-          // );
+          showCustomToast(
+            message: "Account created successfully",
+            color: AppColors.kGreenColor,
+          );
         }
         if (state is RegisterFailure) {
           buildErrorDialog(context, state.errorMessage);

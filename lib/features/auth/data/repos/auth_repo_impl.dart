@@ -1,10 +1,12 @@
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:eyego_task/core/database/api/end_points.dart';
+import 'package:eyego_task/core/database/cache/cache_helper.dart';
 import 'package:eyego_task/core/errors/exceptions.dart';
 import 'package:eyego_task/core/errors/failure.dart';
 import 'package:eyego_task/core/services/database_service.dart';
 import 'package:eyego_task/core/services/firebase_auth_service.dart';
+import 'package:eyego_task/core/services/get_it_service.dart';
 import 'package:eyego_task/features/auth/data/models/user_model.dart';
 import 'package:eyego_task/features/auth/domain/entity/user_entity.dart';
 import 'package:eyego_task/features/auth/domain/repos/auth_repo.dart';
