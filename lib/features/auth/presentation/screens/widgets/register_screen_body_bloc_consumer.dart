@@ -16,11 +16,7 @@ class RegisterScreenBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccess) {
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            Routes.homeScreen,
-            (route) => false,
-          );
+          Navigator.pushReplacementNamed(context, Routes.homeScreen);
           showCustomToast(
             message: "Account created successfully",
             color: AppColors.kGreenColor,

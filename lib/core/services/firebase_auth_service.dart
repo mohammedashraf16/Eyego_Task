@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:eyego_task/core/database/cache/cache_helper.dart';
 import 'package:eyego_task/core/errors/exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,6 +41,10 @@ class FirebaseAuthService {
 
   Future deleteUser() async {
     await FirebaseAuth.instance.currentUser!.delete();
+  }
+
+  Future logOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 
   Future<User> signInWithEmailAndPassword({

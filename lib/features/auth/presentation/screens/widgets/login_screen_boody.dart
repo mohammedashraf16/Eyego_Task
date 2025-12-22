@@ -9,6 +9,7 @@ import 'package:eyego_task/features/auth/presentation/screens/widgets/custom_log
 import 'package:eyego_task/features/auth/presentation/screens/widgets/custom_or_login_with_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreenBody extends StatefulWidget {
   const LoginScreenBody({super.key});
@@ -21,6 +22,7 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late String email, password;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,27 +33,27 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 50),
+              SizedBox(height: 50.h),
               Text(
                 "Login",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 24),
+              SizedBox(height: 24.h),
               Card(
-                margin: EdgeInsets.all(30),
+                margin: EdgeInsets.all(30.r),
                 elevation: 2,
                 color: AppColors.kWhiteColor,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  borderRadius: BorderRadius.all(Radius.circular(12.r)),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 10.h,
                   ),
                   child: Column(
                     children: [
-                      SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                       CustomTextFormField(
                         onSaved: (value) {
                           email = value!;
@@ -59,14 +61,14 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
                         lable: "Email",
                         keyboardType: TextInputType.emailAddress,
                       ),
-                      SizedBox(height: 16),
+                      SizedBox(height: 16.h),
                       PasswordField(
                         onSaved: (value) {
                           password = value!;
                         },
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 12.0, left: 8),
+                        padding: EdgeInsets.only(top: 12.h, left: 8.w),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -76,13 +78,14 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
                               style: TextStyle(
                                 color: AppColors.kPrimaryColor,
                                 fontWeight: FontWeight.bold,
+                                fontSize: 14.sp,
                               ),
                             ),
                           ],
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        padding: EdgeInsets.symmetric(vertical: 20.h),
                         child: CustomBtn(
                           lable: "Login",
                           onPressed: () {
@@ -93,6 +96,7 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
                                   .signInWithEmailAndPassword(email, password);
                             } else {
                               autoValidateMode = AutovalidateMode.always;
+                              setState(() {});
                             }
                           },
                         ),
@@ -106,7 +110,7 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
                               lable: "Google",
                             ),
                           ),
-                          SizedBox(width: 15),
+                          SizedBox(width: 15.w),
                           Expanded(
                             child: CustomLoginWithGoogleOrFacebookWidget(
                               image: "assets/images/Facebook.png",
@@ -115,11 +119,11 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 60),
+                      SizedBox(height: 60.h),
                       CustomHaveAccountOrNotWidget(
                         onTap: () =>
                             Navigator.pushNamed(context, Routes.registerScreen),
-                        title: "Don’t have account? ",
+                        title: "Don't have account? ",
                         subTitle: "Create now",
                       ),
                     ],

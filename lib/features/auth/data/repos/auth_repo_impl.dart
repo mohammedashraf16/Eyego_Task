@@ -59,6 +59,7 @@ class AuthRepoImpl extends AuthRepo {
         email: email,
         password: password,
       );
+      await sl<CacheHelper>().saveData(key: "token", value: user.uid);
       return Right(UserModel.fromFireStore(user));
     } on CustomException catch (e) {
       return Left(ServerFailure(errorMessage: e.message));
@@ -83,6 +84,18 @@ class AuthRepoImpl extends AuthRepo {
   Future<void> deleteUser(User? user) async {
     if (user != null) {
       await firebaseAuthService.deleteUser();
+    }
+  }
+
+  @override
+  Future<void> signOut() async {
+    try {
+      await firebaseAuthService.logOut();
+      await sl<CacheHelper>().removeData(key: "token");
+      log("User logged out and session cleared");
+    } on Exception catch (e) {
+      log("Error Logging out: ${e.toString()}");
+      throw CustomException(message: "Failed to log out");
     }
   }
 }

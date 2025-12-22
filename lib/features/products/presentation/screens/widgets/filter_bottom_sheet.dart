@@ -3,6 +3,7 @@ import 'package:eyego_task/features/products/data/models/product_filter.dart';
 import 'package:eyego_task/features/products/presentation/manager/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FilterBottomSheet extends StatefulWidget {
   final ProductFilter currentFilter;
@@ -52,44 +53,44 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
     final categories = context.read<ProductCubit>().getAvailableCategories();
 
     return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: const BoxDecoration(
+      padding: EdgeInsets.all(20.r),
+      decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
       ),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Header
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   'Filter Products',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 22.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.close),
+                  icon: Icon(Icons.close, size: 24.sp),
                 ),
               ],
             ),
-            const Divider(height: 30),
-
-            // Category Filter
-            const Text(
+            Divider(height: 30.h),
+            Text(
               'Category',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10.h),
             Wrap(
-              spacing: 8,
-              runSpacing: 8,
+              spacing: 8.w,
+              runSpacing: 8.h,
               children: [
                 ChoiceChip(
-                  label: const Text('All'),
+                  label: Text('All', style: TextStyle(fontSize: 12.sp)),
                   selected: selectedCategory == null,
                   onSelected: (selected) {
                     if (selected) {
@@ -105,7 +106,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                 ),
                 ...categories.map(
                   (category) => ChoiceChip(
-                    label: Text(category),
+                    label: Text(category, style: TextStyle(fontSize: 12.sp)),
                     selected: selectedCategory == category,
                     onSelected: (selected) {
                       setState(
@@ -123,40 +124,42 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               ],
             ),
 
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
             const Divider(),
-
-            // Price Range Filter
-            const Text(
+            Text(
               'Price Range',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10.h),
             Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: minPriceController,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
+                    style: TextStyle(fontSize: 14.sp),
+                    decoration: InputDecoration(
                       labelText: 'Min Price',
+                      labelStyle: TextStyle(fontSize: 12.sp),
                       prefixText: '\$',
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                     ),
                     onChanged: (value) {
                       minPrice = double.tryParse(value);
                     },
                   ),
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10.w),
                 Expanded(
                   child: TextField(
                     controller: maxPriceController,
                     keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
+                    style: TextStyle(fontSize: 14.sp),
+                    decoration: InputDecoration(
                       labelText: 'Max Price',
+                      labelStyle: TextStyle(fontSize: 12.sp),
                       prefixText: '\$',
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                     ),
                     onChanged: (value) {
                       maxPrice = double.tryParse(value);
@@ -166,26 +169,24 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               ],
             ),
 
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
             const Divider(),
-
-            // Rating Filter
-            const Text(
+            Text(
               'Minimum Rating',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10.h),
             Wrap(
-              spacing: 8,
+              spacing: 8.w,
               children: [
                 for (int i = 5; i >= 1; i--)
                   ChoiceChip(
                     label: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('$i'),
-                        const Icon(Icons.star, size: 16, color: Colors.amber),
-                        const Text(' & up'),
+                        Text('$i', style: TextStyle(fontSize: 12.sp)),
+                        Icon(Icons.star, size: 16.sp, color: Colors.amber),
+                        Text(' & up', style: TextStyle(fontSize: 12.sp)),
                       ],
                     ),
                     selected: minRating == i.toDouble(),
@@ -204,21 +205,22 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               ],
             ),
 
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
             const Divider(),
-
-            // Sort By
-            const Text(
+            Text(
               'Sort By',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10.h),
             Wrap(
-              spacing: 8,
-              runSpacing: 8,
+              spacing: 8.w,
+              runSpacing: 8.h,
               children: [
                 ChoiceChip(
-                  label: const Text('Price: Low to High'),
+                  label: Text(
+                    'Price: Low to High',
+                    style: TextStyle(fontSize: 12.sp),
+                  ),
                   selected: sortBy == 'price_asc',
                   onSelected: (selected) {
                     setState(() => sortBy = selected ? 'price_asc' : null);
@@ -229,7 +231,10 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                   ),
                 ),
                 ChoiceChip(
-                  label: const Text('Price: High to Low'),
+                  label: Text(
+                    'Price: High to Low',
+                    style: TextStyle(fontSize: 12.sp),
+                  ),
                   selected: sortBy == 'price_desc',
                   onSelected: (selected) {
                     setState(() => sortBy = selected ? 'price_desc' : null);
@@ -240,7 +245,10 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                   ),
                 ),
                 ChoiceChip(
-                  label: const Text('Highest Rating'),
+                  label: Text(
+                    'Highest Rating',
+                    style: TextStyle(fontSize: 12.sp),
+                  ),
                   selected: sortBy == 'rating',
                   onSelected: (selected) {
                     setState(() => sortBy = selected ? 'rating' : null);
@@ -251,7 +259,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                   ),
                 ),
                 ChoiceChip(
-                  label: const Text('Name (A-Z)'),
+                  label: Text('Name (A-Z)', style: TextStyle(fontSize: 12.sp)),
                   selected: sortBy == 'title',
                   onSelected: (selected) {
                     setState(() => sortBy = selected ? 'title' : null);
@@ -264,9 +272,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
               ],
             ),
 
-            const SizedBox(height: 30),
-
-            // Action Buttons
+            SizedBox(height: 30.h),
             Row(
               children: [
                 Expanded(
@@ -276,16 +282,19 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                       Navigator.pop(context);
                     },
                     style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
                       side: const BorderSide(color: AppColors.kPrimaryColor),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Clear All',
-                      style: TextStyle(color: AppColors.kPrimaryColor),
+                      style: TextStyle(
+                        color: AppColors.kPrimaryColor,
+                        fontSize: 14.sp,
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10.w),
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
@@ -302,9 +311,12 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.kPrimaryColor,
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
                     ),
-                    child: const Text('Apply Filters'),
+                    child: Text(
+                      'Apply Filters',
+                      style: TextStyle(fontSize: 14.sp),
+                    ),
                   ),
                 ),
               ],

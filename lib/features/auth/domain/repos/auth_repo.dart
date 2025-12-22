@@ -14,4 +14,5 @@ abstract class AuthRepo {
     String password,
   );
   Future addUserData({required UserEntity user});
+  Future<void> signOut();
 }

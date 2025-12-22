@@ -1,14 +1,17 @@
 import 'package:eyego_task/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomBtn extends StatelessWidget {
   const CustomBtn({super.key, required this.lable, required this.onPressed});
+
   final String lable;
   final void Function() onPressed;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 50.h,
       width: double.infinity,
       child: ElevatedButton(
         onPressed: onPressed,
@@ -16,7 +19,7 @@ class CustomBtn extends StatelessWidget {
           elevation: 2,
           backgroundColor: Colors.blueAccent,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
           ),
         ),
         child: Row(
@@ -24,9 +27,9 @@ class CustomBtn extends StatelessWidget {
           children: [
             Text(
               lable,
-              style: TextStyle(color: AppColors.kWhiteColor, fontSize: 18),
+              style: TextStyle(color: AppColors.kWhiteColor, fontSize: 18.sp),
             ),
-            Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 22),
+            Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 22.sp),
           ],
         ),
       ),
