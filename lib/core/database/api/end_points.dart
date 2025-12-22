@@ -7,4 +7,5 @@ class EndPoints {
 class ApiKeys {
   static const String query = "q";
   static const String token = "token";
+  static const addUserData = "users";
 }
