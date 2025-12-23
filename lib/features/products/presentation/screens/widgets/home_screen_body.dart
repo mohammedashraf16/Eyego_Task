@@ -13,9 +13,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreenBody extends StatelessWidget {
-  const HomeScreenBody({super.key, required this.hasActiveFilters});
-
   final bool hasActiveFilters;
+  final String userName;
+
+  const HomeScreenBody({
+    super.key,
+    required this.hasActiveFilters,
+    required this.userName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +132,7 @@ class HomeScreenBody extends StatelessWidget {
                         bottom: 8.h,
                       ),
                       child: Text(
-                        "👋 Welcome, Mohammed",
+                        "👋 Welcome, $userName",
                         style: TextStyle(
                           fontSize: 18.sp,
                           color: AppColors.kWhiteColor.withOpacity(0.9),

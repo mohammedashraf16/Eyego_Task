@@ -16,7 +16,11 @@ class LoginScreenBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-          Navigator.pushReplacementNamed(context, Routes.homeScreen);
+          Navigator.pushReplacementNamed(
+            context,
+            Routes.homeScreen,
+            arguments: state.userEntity,
+          );
           showCustomToast(
             message: "Logged In successfully",
             color: AppColors.kGreenColor,

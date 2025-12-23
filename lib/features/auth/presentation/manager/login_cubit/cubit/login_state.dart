@@ -23,4 +23,8 @@ final class LogoutLoading extends LoginState {}
 
 final class LogoutSuccess extends LoginState {}
 
-final class LogouFailure extends LoginState {}
+final class LogoutFailure extends LoginState {
+  final String errorMessage;
+
+  LogoutFailure({required this.errorMessage});
+}

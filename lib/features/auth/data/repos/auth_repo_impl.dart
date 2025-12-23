@@ -11,6 +11,7 @@ import 'package:eyego_task/features/auth/data/models/user_model.dart';
 import 'package:eyego_task/features/auth/domain/entity/user_entity.dart';
 import 'package:eyego_task/features/auth/domain/repos/auth_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthRepoImpl extends AuthRepo {
   final FirebaseAuthService firebaseAuthService;
@@ -20,6 +21,7 @@ class AuthRepoImpl extends AuthRepo {
     required this.firebaseAuthService,
     required this.dataBaseService,
   });
+
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
     String email,
@@ -60,7 +62,10 @@ class AuthRepoImpl extends AuthRepo {
         password: password,
       );
       await sl<CacheHelper>().saveData(key: "token", value: user.uid);
-      return Right(UserModel.fromFireStore(user));
+      final userDataResult = await getUserData(user.uid);
+      return userDataResult.fold((failure) {
+        return Right(UserModel.fromFireStore(user));
+      }, (userEntity) => Right(userEntity));
     } on CustomException catch (e) {
       return Left(ServerFailure(errorMessage: e.message));
     } catch (e) {
@@ -70,6 +75,27 @@ class AuthRepoImpl extends AuthRepo {
       return Left(
         ServerFailure(errorMessage: "Something went wrong. Please try again."),
       );
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> getUserData(String uid) async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection(ApiKeys.addUserData)
+          .where('uid', isEqualTo: uid)
+          .limit(1)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        final userData = querySnapshot.docs.first.data();
+        return Right(UserModel.fromJson(userData));
+      } else {
+        return Left(ServerFailure(errorMessage: "User data not found"));
+      }
+    } catch (e) {
+      log("Exception in AuthRepoImpl.getUserData : ${e.toString()}");
+      return Left(ServerFailure(errorMessage: "Failed to fetch user data"));
     }
   }
 

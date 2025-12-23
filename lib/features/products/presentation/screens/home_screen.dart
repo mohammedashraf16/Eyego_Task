@@ -1,12 +1,15 @@
 import 'package:eyego_task/core/services/get_it_service.dart';
 import 'package:eyego_task/core/utils/app_colors.dart';
+import 'package:eyego_task/features/auth/domain/entity/user_entity.dart';
 import 'package:eyego_task/features/products/presentation/manager/product_cubit.dart';
 import 'package:eyego_task/features/products/presentation/screens/widgets/home_screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final UserEntity? user;
+
+  const HomeScreen({super.key, this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +72,10 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           }
-          return HomeScreenBody(hasActiveFilters: hasActiveFilters);
+          return HomeScreenBody(
+            hasActiveFilters: hasActiveFilters,
+            userName: user?.name ?? 'User',
+          );
         },
       ),
     );
