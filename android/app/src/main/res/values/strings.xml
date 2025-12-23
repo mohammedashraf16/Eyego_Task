@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resourses>
+<string name="app_name">eyego_task</string>
+    <string name="facebook_app_id">1330524868825038</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">78375b397a47cfe40b70c306c9ee564a</string>
+</resourses>

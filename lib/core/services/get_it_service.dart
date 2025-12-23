@@ -9,8 +9,6 @@ import 'package:eyego_task/core/services/firebase_auth_service.dart';
 import 'package:eyego_task/core/services/firestore_service.dart';
 import 'package:eyego_task/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:eyego_task/features/auth/domain/repos/auth_repo.dart';
-import 'package:eyego_task/features/auth/presentation/manager/login_cubit/cubit/login_cubit.dart';
-import 'package:eyego_task/features/auth/presentation/manager/register_cubit/cubit/register_cubit.dart';
 import 'package:eyego_task/features/products/data/data_source/product_local_data_source.dart';
 import 'package:eyego_task/features/products/data/data_source/product_remote_data_source.dart';
 import 'package:eyego_task/features/products/data/repos/product_repo_impl.dart';

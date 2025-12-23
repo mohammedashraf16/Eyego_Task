@@ -119,4 +119,24 @@ class AuthRepoImpl extends AuthRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, UserEntity>> signInWithFacebook() async {
+    User? user;
+    try {
+      user = await firebaseAuthService.signInWithFacebook();
+      var userEntity = UserModel.fromFireStore(user);
+      await addUserData(user: userEntity);
+      return Right(userEntity);
+    } on CustomException catch (e) {
+      await deleteUser(user);
+      return Left(ServerFailure(errorMessage: e.message));
+    } catch (e) {
+      await deleteUser(user);
+      log("Exception in AuthRepoImpl.signInWithFacebook : ${e.toString()}");
+      return Left(
+        ServerFailure(errorMessage: "Something went wrong. Please try again."),
+      );
+    }
+  }
 }

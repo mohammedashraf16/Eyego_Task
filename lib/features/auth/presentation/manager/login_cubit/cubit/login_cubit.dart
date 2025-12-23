@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:eyego_task/core/database/cache/cache_helper.dart';
 import 'package:eyego_task/features/auth/domain/entity/user_entity.dart';
 import 'package:eyego_task/features/auth/domain/repos/auth_repo.dart';
 import 'package:meta/meta.dart';
@@ -22,6 +21,19 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> signInWithGoogle() async {
     emit(LoginLoading());
     var result = await authRepo.signInWithGoogle();
+    result.fold(
+      (failure) {
+        emit(LoginFailure(errorMessage: failure.errorMessage));
+      },
+      (user) {
+        emit(LoginSuccess(userEntity: user));
+      },
+    );
+  }
+
+  Future<void> signInWithFacebook() async {
+    emit(LoginLoading());
+    var result = await authRepo.signInWithFacebook();
     result.fold(
       (failure) {
         emit(LoginFailure(errorMessage: failure.errorMessage));

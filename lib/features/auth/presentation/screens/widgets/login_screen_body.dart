@@ -116,6 +116,9 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
                           SizedBox(width: 15.w),
                           Expanded(
                             child: CustomLoginWithGoogleOrFacebookWidget(
+                              onPressed: () {
+                                context.read<LoginCubit>().signInWithFacebook();
+                              },
                               image: "assets/images/Facebook.png",
                               lable: "Facebook",
                             ),
