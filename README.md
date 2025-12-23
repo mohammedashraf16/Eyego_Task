@@ -386,7 +386,7 @@ Solution: Check internet connectivity. If offline, products should load from cac
 ## 👨‍💻 Developer
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/mohammedashraf16)
+- GitHub: [@mohammedashraf16](https://github.com/mohammedashraf16)
 - Email: mohammedashraf1692003@gmail.com
 
 ---
