@@ -6,9 +6,11 @@ class CustomLoginWithGoogleOrFacebookWidget extends StatelessWidget {
     super.key,
     required this.image,
     required this.lable,
+    this.onPressed,
   });
   final String image;
   final String lable;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,7 +22,7 @@ class CustomLoginWithGoogleOrFacebookWidget extends StatelessWidget {
           ),
           backgroundColor: AppColors.kBordersideColor,
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

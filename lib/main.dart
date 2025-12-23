@@ -3,7 +3,6 @@ import 'package:eyego_task/config/router/routes.dart';
 import 'package:eyego_task/core/database/cache/cache_helper.dart';
 import 'package:eyego_task/core/services/get_it_service.dart';
 import 'package:eyego_task/core/services/my_bloc_observer.dart';
-import 'package:eyego_task/features/auth/presentation/screens/login_screen.dart';
 import 'package:eyego_task/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

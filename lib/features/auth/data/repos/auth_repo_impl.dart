@@ -98,4 +98,25 @@ class AuthRepoImpl extends AuthRepo {
       throw CustomException(message: "Failed to log out");
     }
   }
+
+  @override
+  Future<Either<Failure, UserEntity>> signInWithGoogle() async {
+    User? user;
+    try {
+      user = await firebaseAuthService.signInWithGoogle();
+      var userEntity = UserModel.fromFireStore(user);
+      await addUserData(user: userEntity);
+      await sl<CacheHelper>().saveData(key: "token", value: user.uid);
+      return Right(userEntity);
+    } on CustomException catch (e) {
+      await deleteUser(user);
+      return Left(ServerFailure(errorMessage: e.message));
+    } catch (e) {
+      await deleteUser(user);
+      log("Exception in AuthRepoImpl.signInWithGoogle : ${e.toString()}");
+      return Left(
+        ServerFailure(errorMessage: "Something went wrong. Please try again."),
+      );
+    }
+  }
 }

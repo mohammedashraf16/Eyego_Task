@@ -4,8 +4,6 @@ import 'package:eyego_task/core/widgets/custom_text_form_field.dart';
 import 'package:eyego_task/core/widgets/password_field.dart';
 import 'package:eyego_task/features/auth/presentation/manager/register_cubit/cubit/register_cubit.dart';
 import 'package:eyego_task/features/auth/presentation/screens/widgets/custom_have_an_account_or_not_widget.dart';
-import 'package:eyego_task/features/auth/presentation/screens/widgets/custom_login_with_google_or_facebook_widget.dart';
-import 'package:eyego_task/features/auth/presentation/screens/widgets/custom_or_login_with_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -94,25 +92,6 @@ class _RegisterScreenBodyState extends State<RegisterScreenBody> {
                           },
                         ),
                       ),
-                      CustomOrLoginWithTextWidget(lable: "Or Register with"),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CustomLoginWithGoogleOrFacebookWidget(
-                              image: "assets/images/google.png",
-                              lable: "Google",
-                            ),
-                          ),
-                          SizedBox(width: 15),
-                          Expanded(
-                            child: CustomLoginWithGoogleOrFacebookWidget(
-                              image: "assets/images/Facebook.png",
-                              lable: "Facebook",
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 60),
                       CustomHaveAccountOrNotWidget(
                         onTap: () => Navigator.pop(context),
                         title: "Already have an account? ",
