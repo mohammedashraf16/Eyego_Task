@@ -4,9 +4,15 @@ A feature-rich Flutter application that demonstrates clean architecture, state m
 
 ## 📱 Demo Video
 
-[Insert your recorded demo video link here]
-
----
+<div align="center">
+<a href="https://drive.google.com/file/d/1ZBvFJ2D8PU0S0Oa_SFVw0Ua2_ryW6zzz/view" target="_blank">
+  <img
+    width="200"
+    alt="App Demo Video"
+    src="https://github.com/user-attachments/assets/24f70448-243c-42a5-9c11-023d9b03c995"
+  />
+</a>
+</div>
 
 ## 📸 Screenshots
 
